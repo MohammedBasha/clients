@@ -33,8 +33,8 @@ require 'functions.php';
         <td><?php echo $client['phone']; ?></td>
         <td><?php echo $client['city']; ?></td>
         <td>
-            <a href="update.php?id=<?php echo $client['id']; ?>" title="update <?php echo $client['name']; ?>">update</a>
-            <a href="delete.php?id=<?php echo $client['id']; ?>" title="delete <?php echo $client['name']; ?>">delete</a>
+            <a href="pages/update.php?id=<?php echo $client['id']; ?>" title="update <?php echo $client['name']; ?>">update</a>
+            <a href="pages/delete.php?id=<?php echo $client['id']; ?>" title="delete <?php echo $client['name']; ?>">delete</a>
         </td>
     </tr>
         <?php
