@@ -3,6 +3,9 @@ session_start();
 require 'includes/config.php';
 require 'includes/users_functions.php';
 
+if(checkLogin())
+    header('LOCATION: index.php');
+
 if (count($_POST) > 0) {
     $username = $_POST['username'];
     $password = $_POST['password'];
