@@ -16,6 +16,9 @@ if(!checkLogin())
     <title>Clients | Home Page</title>
 </head>
 <body>
+<div>welcome, <?php echo $_SESSION['username']; ?> |
+    <a href="logout.php" title="logout">logout</a>
+</div>
 <form action="includes/pages/search.php" method="get">
     <label for="search">search: </label>
     <input type="text" name="search" id="search">

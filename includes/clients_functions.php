@@ -56,8 +56,10 @@ function searchClients($keyword) {
     $query = mysqli_query($connection, "SELECT * FROM clients WHERE name LIKE '%$keyword%' OR email LIKE '%$keyword%' OR phone LIKE '%$keyword%' OR city LIKE '%$keyword%'");
 
     $clients = [];
-    while($row = mysqli_fetch_assoc($query)) {
-        $clients[] = $row;
+    if(mysqli_affected_rows($connection) > 0) {
+        while($row = mysqli_fetch_assoc($query)) {
+            $clients[] = $row;
+        }
     }
     mysqli_close($connection);
     return $clients;

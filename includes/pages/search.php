@@ -4,10 +4,10 @@ require '../config.php';
 require '../clients_functions.php';
 require '../users_functions.php';
 
-if(!checkLogin())
+if (!checkLogin())
     header('LOCATION: ../../login.php');
 
-$search = isset($_GET['search'])? (string)$_GET['search'] : '';
+$search = isset($_GET['search']) ? (string)$_GET['search'] : '';
 ?>
 
 <!doctype html>
@@ -17,7 +17,7 @@ $search = isset($_GET['search'])? (string)$_GET['search'] : '';
     <title>Clients | Search Clients Page</title>
 </head>
 <body>
-
+<div>welcome, <?php echo $_SESSION['username']; ?></div>
 <h1>Search Result</h1>
 <table border="1">
     <tr>
@@ -28,9 +28,10 @@ $search = isset($_GET['search'])? (string)$_GET['search'] : '';
         <th>city</th>
         <th>controls</th>
     </tr>
-        <?php
+    <?php
+    if (!empty($search)) {
         $clients = searchClients($search);
-        foreach($clients as $client) {
+        foreach ($clients as $client) {
             ?>
             <tr>
                 <td><?php echo $client['id']; ?></td>
@@ -45,7 +46,14 @@ $search = isset($_GET['search'])? (string)$_GET['search'] : '';
             </tr>
             <?php
         }
-        ?>
+    } else {
+    ?>
+        <tr>
+            <td colspan="6">No results</td>
+        </tr>
+    <?php
+    }
+    ?>
 </table>
 <div>
     <a href="add.php" title="Add a new client">Add a new client</a>
