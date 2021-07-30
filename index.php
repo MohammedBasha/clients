@@ -12,6 +12,11 @@ require 'functions.php';
     <title>Clients | Home Page</title>
 </head>
 <body>
+<form action="pages/search.php" method="get">
+    <label for="search">search: </label>
+    <input type="text" name="search" id="search">
+    <button type="submit">Search</button>
+</form>
 <h1>My clients</h1>
 <table border="1">
     <tr>
