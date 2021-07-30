@@ -37,7 +37,7 @@ function getClient($id) {
     $client = [];
 
     if(mysqli_num_rows($query) > 0) {
-        mysqli_fetch_assoc($query);
+        $client = mysqli_fetch_assoc($query);
     }
 
     mysqli_close($connection);
@@ -74,7 +74,7 @@ function addClient($name, $email, $phone, $city) {
     $connection = mysqli_connect(SERVER, DBUSER, DBPASS, DBNAME);
     $query = mysqli_query($connection, "INSERT INTO clients (name, email, phone, city) VALUES ('$name', '$email', '$phone', '$city')");
 
-    if($query && mysql_affected_rows($connection) > 0)
+    if($query && mysqli_affected_rows($connection) > 0)
         return true;
     return false;
 }
@@ -86,7 +86,7 @@ function updateClient($id, $name, $email, $phone, $city) {
     $connection = mysqli_connect(SERVER, DBUSER, DBPASS, DBNAME);
     $query = mysqli_query($connection, "UPDATE clients SET name = '$name', email = '$email', phone = '$phone', city = '$city' WHERE id = $id");
 
-    if($query && mysql_affected_rows($connection) > 0)
+    if($query && mysqli_affected_rows($connection) > 0)
         return true;
     return false;
 }
@@ -98,7 +98,7 @@ function deleteClient($id) {
     $connection = mysqli_connect(SERVER, DBUSER, DBPASS, DBNAME);
     $query = mysqli_query($connection, "DELETE FROM clients WHERE id = $id");
 
-    if($query && mysql_affected_rows($connection) > 0)
+    if($query && mysqli_affected_rows($connection) > 0)
         return true;
     return false;
 }
