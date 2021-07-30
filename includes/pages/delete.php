@@ -1,7 +1,7 @@
 <?php
 
 require '../config.php';
-require '../functions.php';
+require '../clients_functions.php';
 
 $id = isset($_GET['id'])? (int)$_GET['id'] : 0;
 

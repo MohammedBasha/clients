@@ -9,7 +9,7 @@
 <?php
 
 require '../config.php';
-require '../functions.php';
+require '../clients_functions.php';
 if(count($_POST) > 0) {
     $name   = $_POST['name'];
     $email  = $_POST['email'];

@@ -1,7 +1,7 @@
 <?php
 
 require '../config.php';
-require '../functions.php';
+require '../clients_functions.php';
 
 $search = isset($_GET['search'])? (string)$_GET['search'] : '';
 ?>

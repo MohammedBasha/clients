@@ -1,7 +1,7 @@
 <?php
 
-require 'config.php';
-require 'functions.php';
+require 'includes/config.php';
+require 'includes/clients_functions.php';
 
 ?>
 
@@ -12,7 +12,7 @@ require 'functions.php';
     <title>Clients | Home Page</title>
 </head>
 <body>
-<form action="pages/search.php" method="get">
+<form action="includes/pages/search.php" method="get">
     <label for="search">search: </label>
     <input type="text" name="search" id="search">
     <button type="submit">Search</button>
@@ -38,8 +38,8 @@ require 'functions.php';
         <td><?php echo $client['phone']; ?></td>
         <td><?php echo $client['city']; ?></td>
         <td>
-            <a href="pages/update.php?id=<?php echo $client['id']; ?>" title="update <?php echo $client['name']; ?>">update</a>
-            <a href="pages/delete.php?id=<?php echo $client['id']; ?>" title="delete <?php echo $client['name']; ?>">delete</a>
+            <a href="includes/pages/update.php?id=<?php echo $client['id']; ?>" title="update <?php echo $client['name']; ?>">update</a>
+            <a href="includes/pages/delete.php?id=<?php echo $client['id']; ?>" title="delete <?php echo $client['name']; ?>">delete</a>
         </td>
     </tr>
         <?php
@@ -47,7 +47,7 @@ require 'functions.php';
         ?>
 </table>
 <div>
-    <a href="pages/add.php" title="Add a new client">Add a new client</a>
+    <a href="includes/pages/add.php" title="Add a new client">Add a new client</a>
 </div>
 </body>
 </html>
