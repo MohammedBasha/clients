@@ -10,7 +10,7 @@ function login($user, $pass) {
     if(!$connection)
         exit('Error: ' . mysqli_error($connection));
 
-    $query = mysqli_query($connection, "SELECT * FROM users WHERE name = '$user' AND password = '$pass'");
+    $query = mysqli_query($connection, "SELECT * FROM users WHERE username = '$user' AND password = '$pass'");
 
     if(mysqli_num_rows($query) > 0) {
         $_SESSION['username'] = $user;

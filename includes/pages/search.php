@@ -1,7 +1,11 @@
 <?php
-
+session_start();
 require '../config.php';
 require '../clients_functions.php';
+require '../users_functions.php';
+
+if(!checkLogin())
+    header('LOCATION: ../../login.php');
 
 $search = isset($_GET['search'])? (string)$_GET['search'] : '';
 ?>

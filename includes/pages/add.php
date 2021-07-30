@@ -1,3 +1,10 @@
+<?php
+session_start();
+require '../config.php';
+require '../clients_functions.php';
+require '../users_functions.php';
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,8 +15,9 @@
 
 <?php
 
-require '../config.php';
-require '../clients_functions.php';
+if(!checkLogin())
+    header('LOCATION: ../../login.php');
+
 if(count($_POST) > 0) {
     $name   = $_POST['name'];
     $email  = $_POST['email'];

@@ -1,7 +1,11 @@
 <?php
-
+session_start();
 require 'includes/config.php';
 require 'includes/clients_functions.php';
+require 'includes/users_functions.php';
+
+if(!checkLogin())
+    header('LOCATION: login.php');
 
 ?>
 
