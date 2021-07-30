@@ -12,8 +12,8 @@ require '../config.php';
 require '../functions.php';
 if(count($_POST) > 0) {
     $name   = $_POST['name'];
-    $phone  = $_POST['email'];
-    $email  = $_POST['phone'];
+    $email  = $_POST['email'];
+    $phone  = $_POST['phone'];
     $city   = $_POST['city'];
 
     if(addClient($name, $email, $phone, $city)) {
@@ -24,7 +24,7 @@ if(count($_POST) > 0) {
 } else {
 ?>
 
-<form action="<?php $_SERVER['PHP_SELF']; ?>" method="post">
+<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
     <label for="name">name</label>
     <input type="text" name="name" id="name" required><br>
     <label for="email">email</label>
