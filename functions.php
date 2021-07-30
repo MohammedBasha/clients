@@ -6,10 +6,11 @@
 
 function getClients() {
     $connection = mysqli_connect(SERVER, DBUSER, DBPASS, DBNAME);
-    $query = mysqli_query($connection, "SELECT * FROM clients");
 
-    if(!$query)
+    if(!$connection)
         exit('Error: ' . mysqli_error($connection));
+
+    $query = mysqli_query($connection, "SELECT * FROM clients");
 
     $clients = [];
     if(mysqli_num_rows($query) > 0) {
@@ -17,9 +18,7 @@ function getClients() {
             $clients[] = $row;
         }
     }
-
     mysqli_close($connection);
-
     return $clients;
 }
 
@@ -29,19 +28,18 @@ function getClients() {
 
 function getClient($id) {
     $connection = mysqli_connect(SERVER, DBUSER, DBPASS, DBNAME);
-    $query = mysqli_query($connection, "SELECT * FROM clients WHERE id = $id");
 
-    if(!$query)
+    if(!$connection)
         exit('Error: ' . mysqli_error($connection));
+
+    $query = mysqli_query($connection, "SELECT * FROM clients WHERE id = $id");
 
     $client = [];
 
     if(mysqli_num_rows($query) > 0) {
         $client = mysqli_fetch_assoc($query);
     }
-
     mysqli_close($connection);
-
     return $client;
 }
 
@@ -51,18 +49,17 @@ function getClient($id) {
 
 function searchClients($keyword) {
     $connection = mysqli_connect(SERVER, DBUSER, DBPASS, DBNAME);
-    $query = mysqli_query($connection, "SELECT * FROM clients WHERE name LIKE '%$keyword%' OR email LIKE '%$keyword%' OR phone LIKE '%$keyword%' OR city LIKE '%$keyword%'");
 
-    if(!$query)
+    if(!$connection)
         exit('Error: ' . mysqli_error($connection));
+
+    $query = mysqli_query($connection, "SELECT * FROM clients WHERE name LIKE '%$keyword%' OR email LIKE '%$keyword%' OR phone LIKE '%$keyword%' OR city LIKE '%$keyword%'");
 
     $clients = [];
     while($row = mysqli_fetch_assoc($query)) {
         $clients[] = $row;
     }
-
     mysqli_close($connection);
-
     return $clients;
 }
 
@@ -72,10 +69,17 @@ function searchClients($keyword) {
 
 function addClient($name, $email, $phone, $city) {
     $connection = mysqli_connect(SERVER, DBUSER, DBPASS, DBNAME);
+
+    if(!$connection)
+        exit('Error: ' . mysqli_error($connection));
+
     $query = mysqli_query($connection, "INSERT INTO clients (name, email, phone, city) VALUES ('$name', '$email', '$phone', '$city')");
 
-    if($query && mysqli_affected_rows($connection) > 0)
+    if(mysqli_affected_rows($connection) > 0) {
+        mysqli_close($connection);
         return true;
+    }
+    mysqli_close($connection);
     return false;
 }
 
@@ -84,10 +88,17 @@ function addClient($name, $email, $phone, $city) {
  */
 function updateClient($id, $name, $email, $phone, $city) {
     $connection = mysqli_connect(SERVER, DBUSER, DBPASS, DBNAME);
+
+    if(!$connection)
+        exit('Error: ' . mysqli_error($connection));
+
     $query = mysqli_query($connection, "UPDATE clients SET name = '$name', email = '$email', phone = '$phone', city = '$city' WHERE id = $id");
 
-    if($query && mysqli_affected_rows($connection) > 0)
+    if(mysqli_affected_rows($connection) > 0) {
+        mysqli_close($connection);
         return true;
+    }
+    mysqli_close($connection);
     return false;
 }
 
@@ -96,9 +107,16 @@ function updateClient($id, $name, $email, $phone, $city) {
  */
 function deleteClient($id) {
     $connection = mysqli_connect(SERVER, DBUSER, DBPASS, DBNAME);
+
+    if(!$connection)
+        exit('Error: ' . mysqli_error($connection));
+
     $query = mysqli_query($connection, "DELETE FROM clients WHERE id = $id");
 
-    if($query && mysqli_affected_rows($connection) > 0)
+    if(mysqli_affected_rows($connection) > 0) {
+        mysqli_close($connection);
         return true;
+    }
+    mysqli_close($connection);
     return false;
 }
