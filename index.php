@@ -32,6 +32,7 @@ if(!checkLogin())
         <th>email</th>
         <th>phone</th>
         <th>city</th>
+        <th>image</th>
         <th>controls</th>
     </tr>
         <?php
@@ -44,6 +45,9 @@ if(!checkLogin())
         <td><?php echo $client['email']; ?></td>
         <td><?php echo $client['phone']; ?></td>
         <td><?php echo $client['city']; ?></td>
+        <td>
+            <img src="includes/pages/uploads/clients/<?php echo $client['image']; ?>" alt="<?php echo $client['name']; ?>" width="100px">
+        </td>
         <td>
             <a href="includes/pages/update.php?id=<?php echo $client['id']; ?>" title="update <?php echo $client['name']; ?>">update</a>
             <a href="includes/pages/delete.php?id=<?php echo $client['id']; ?>" title="delete <?php echo $client['name']; ?>">delete</a>

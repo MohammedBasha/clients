@@ -69,13 +69,13 @@ function searchClients($keyword) {
  * Adding client
  */
 
-function addClient($name, $email, $phone, $city) {
+function addClient($name, $email, $phone, $city, $image = 'no-img.png') {
     $connection = mysqli_connect(SERVER, DBUSER, DBPASS, DBNAME);
 
     if(!$connection)
         exit('Error: ' . mysqli_error($connection));
 
-    $query = mysqli_query($connection, "INSERT INTO clients (name, email, phone, city) VALUES ('$name', '$email', '$phone', '$city')");
+    $query = mysqli_query($connection, "INSERT INTO clients (name, email, phone, city, image) VALUES ('$name', '$email', '$phone', '$city', '$image')");
 
     if(mysqli_affected_rows($connection) > 0) {
         mysqli_close($connection);
@@ -113,12 +113,22 @@ function deleteClient($id) {
     if(!$connection)
         exit('Error: ' . mysqli_error($connection));
 
+    if (getClient($id)) {
+        $clientData = getClient($id);
+        $clientImage = $clientData['image'];
+    }
+
     $query = mysqli_query($connection, "DELETE FROM clients WHERE id = $id");
 
     if(mysqli_affected_rows($connection) > 0) {
+        if(isset($clientImage) && $clientImage !== 'no-image.png')
+            unlink('uploads/clients/'.$clientImage);
+
         mysqli_close($connection);
+        header('LOCATION: ../../index.php');
         return true;
     }
     mysqli_close($connection);
+    header('LOCATION: ../../index.php');
     return false;
 }
