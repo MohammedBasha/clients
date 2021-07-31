@@ -1,15 +1,18 @@
 <?php
 session_start();
 require '../config.php';
-require '../clients_functions.php';
-require '../users_functions.php';
+require '../clientsClass.php';
+require '../usersClass.php';
 
-if(!checkLogin())
+$clientsC = new clientsClass();
+$usersC = new usersClass();
+
+if(!$usersC->checkLogin())
     header('LOCATION: ../../login.php');
 
 $id = isset($_GET['id'])? (int)$_GET['id'] : 0;
 
-if(deleteClient($id))
+if($clientsC->deleteClient($id))
     echo 'Client is deleted';
 else
     echo 'Client not deleted';

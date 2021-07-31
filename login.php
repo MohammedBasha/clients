@@ -1,7 +1,7 @@
 <?php
 session_start();
 require 'includes/config.php';
-require 'includes/users_functions.php';
+require 'includes/usersClass.php';
 
 if(checkLogin())
     header('LOCATION: index.php');

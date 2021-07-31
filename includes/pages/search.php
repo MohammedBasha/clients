@@ -1,10 +1,13 @@
 <?php
 session_start();
 require '../config.php';
-require '../clients_functions.php';
-require '../users_functions.php';
+require '../clientsClass.php';
+require '../usersClass.php';
 
-if (!checkLogin())
+$clientsC = new clientsClass();
+$usersC = new usersClass();
+
+if (!$usersC->checkLogin())
     header('LOCATION: ../../login.php');
 
 $search = isset($_GET['search']) ? (string)$_GET['search'] : '';
@@ -30,7 +33,7 @@ $search = isset($_GET['search']) ? (string)$_GET['search'] : '';
     </tr>
     <?php
     if (!empty($search)) {
-        $clients = searchClients($search);
+        $clients = $clientsC->searchClients($search);
         foreach ($clients as $client) {
             ?>
             <tr>

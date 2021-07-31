@@ -1,10 +1,13 @@
 <?php
 session_start();
 require 'includes/config.php';
-require 'includes/clients_functions.php';
-require 'includes/users_functions.php';
+require 'includes/clientsClass.php';
+require 'includes/usersClass.php';
 
-if(!checkLogin())
+$clientsC = new clientsClass();
+$usersC = new usersClass();
+
+if(!$usersC->checkLogin())
     header('LOCATION: login.php');
 
 ?>
@@ -36,7 +39,7 @@ if(!checkLogin())
         <th>controls</th>
     </tr>
         <?php
-        $clients = getClients();
+        $clients = $clientsC->getClients();
         foreach($clients as $client) {
         ?>
     <tr>

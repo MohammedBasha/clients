@@ -1,5 +1,5 @@
 <?php
 session_start();
-require 'includes/users_functions.php';
+require 'includes/usersClass.php';
 logout();
 header('LOCATION: login.php');
