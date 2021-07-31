@@ -5,20 +5,20 @@
  */
 
 function getClients() {
-    $connection = mysqli_connect(SERVER, DBUSER, DBPASS, DBNAME);
+    $connection = new mysqli(SERVER, DBUSER, DBPASS, DBNAME);
 
     if(!$connection)
-        exit('Error: ' . mysqli_error($connection));
+        exit('Error: ' . $connection->error);
 
-    $query = mysqli_query($connection, "SELECT * FROM clients");
+    $query = $connection->query("SELECT * FROM clients");
 
     $clients = [];
-    if(mysqli_num_rows($query) > 0) {
-        while($row = mysqli_fetch_assoc($query)) {
+    if($query->num_rows > 0) {
+        while($row = $query->fetch_assoc()) {
             $clients[] = $row;
         }
     }
-    mysqli_close($connection);
+    $connection->close();
     return $clients;
 }
 
